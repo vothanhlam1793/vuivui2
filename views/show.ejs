@@ -1,0 +1,103 @@
+<html>
+    <head>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <script src="/js/undercore.js"></script>
+        <script src="/js/backbone.js"></script>
+        <script src="/js/models.js"></script>
+    </head>
+    <body class="container">
+        <% obj.forEach(function(e, i){ %>
+            <% _url = url + "/" + i %>
+            <a href="<%= _url %>" ><%= i %></a> |
+        <% }) %>
+        <a href="/list">Trang chủ</a>
+        <h1><%= obj[page].name %></h1>
+        <p>MAX: <%= obj[page].data.length %> </p>
+        <div class="">
+            <form method="GET" action="/delconfig/file/<%= name %>/<%= page %>">
+                <input type="submit" value="X" class="btn btn-danger">
+            </form>
+            <form method="POST" action="/save">
+                <input name="nameFile" value="<%= name %>"  style="display: none;">
+                <input name="nameSheet" value="<%= obj[page].name %>"  style="display: none;">
+                <input name="url" value="<%= url %>/<%= page %>" style="display: none;">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label>Từ hàng</label>
+                            <input class="form-control" name="fromRow" value="<%= config.fromRow %>">
+                        </div>
+                        <div class="form-group">
+                            <label>Đến hàng</label>
+                            <input  class="form-control" name="toRow" value="<%= config.toRow %>">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label>Hàng tiêu đề</label>
+                            <input  class="form-control" name="headRow" value="<%= config.headRow %>">
+                        </div>
+                        <div class="form-group">
+                            <label>Hãng</label>
+                            <input  class="form-control" name="brandName" value="<%= config.brandName %>">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label>Mã</label>
+                        <select class="form-control" name="productNameColumn">
+                            <% obj[page].data[config.headRow].forEach(function(e){ %>
+                                <% b = ""; %>
+                                <% if(e.split("\r\n").join("") == config.productNameColumn.split("\r\n").join("") ) { b = "selected" } %>
+                            <option <%= b %>><%= e %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Giá lẻ</label>
+                        <select class="form-control" name="productPriceColumn">
+                            <% obj[page].data[config.headRow].forEach(function(e){ %>
+                                <% b = ""; %>
+                                <% if(e.split("\r\n").join("") == config.productPriceColumn.split("\r\n").join("") ) { b = "selected" } %>
+                            <option <%= b %>><%= e %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                </div>
+                <div class="">
+                    <input class="btn btn-primary" type="submit" value="OK">
+                </div>
+            </form>
+        </div>
+        <div>
+            <table class="table">
+                <% obj[page].data.forEach(function(rows, j){ %>
+                    <tr>
+                        <td><%= j %></td>
+                        <% for(var i = 0; i < rows.length; i++){ %>
+                            
+                            <% if(rows[i] == undefined){ %>
+                                <td> </td>
+                                <% } else { %>
+                                    <td><%= rows[i] %></td>
+                                <% } %>
+                        <% } %>
+                    </tr>
+                <% }) %>
+            </table>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,11 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <a href="/products">Sản phẩm</a><br>
+        <% files.forEach(function(e){ %>
+            <a href="/file/<%= e %>/0"><%= e %></a><br>
+        <%  }) %>
+    </body>
+</html>

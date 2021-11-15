@@ -33,8 +33,6 @@ app.get("/", (req, res) => {
 });
 
 app.get("/list", (req, res)=>{
-    //requiring path and fs modules
-    //joining path of directory 
     var path = require('path');
 
     const directoryPath = path.join(__dirname, '/data');
@@ -54,6 +52,7 @@ app.get("/list", (req, res)=>{
         });
     });
 })
+
 app.get("/setup", function(req, res){
     let jsonData = require('./config/setup.json');
     console.log(jsonData);
@@ -115,6 +114,7 @@ app.get("/delconfig/file/:name/:page", (req, res)=>{
     fs.writeFileSync('./config/setup.json', JSON.stringify(jsonData));
     res.redirect(req.originalUrl.split("/delconfig")[1]);
 });
+
 app.get("/file/:name/:page", (req, res)=>{
     console.log(req.params)
     const fs = require("fs");
@@ -177,8 +177,7 @@ app.post('/file_upload', function (req, res) {
         fs.unlinkSync(uploadPath);
     });
 })
-
-// set port, listen for requests
+require("./route/sheet")(app);
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);

@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <%- include("../header.ejs", {title: title}); %>
+    </head>
+    <body class="container">
+        <% function numberWithCommas(x) { %>
+        <% return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); %>
+        <% } %>
+        <div class="alert alert-secondary">   
+            <%- include("menu.ejs") %>
+        </div>
+        <div>
+            <a href="<%= url %>?new=1">Làm mới</a>
+        </div>
+        <div>
+            <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+            <table class="table table-bordered table-striped" id="myTable">
+                <tr>
+                    <td class="text-center" style="width: 40%"><strong>Tên</strong></td>    
+                    <td class="text-center" style="width: 20%"><strong>Giá lẻ</strong></td>
+                    <td class="text-center" style="width: 20%"><strong>Cấp 2</strong></td>
+                    <td class="text-center" style="width: 20%"><strong>Cấp 1</strong></td>
+                <tr>
+                <% data.forEach(function(e){ %>
+                <tr>
+                    <td><%= e.name %></td>
+                    <td class="text-right"><%= numberWithCommas(Math.round(e.price_3/1000)*1000) %></td>
+                    <td class="text-right"><%= numberWithCommas(Math.round(e.price_2/1000)*1000) %></td>
+                    <td class="text-right"><%= numberWithCommas(Math.round(e.price_1/1000)*1000) %></td>
+                </tr>
+                <% }); %>
+            </table>
+        </div>
+        <script>
+            function myFunction() {
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("myTable");
+                tr = table.getElementsByTagName("tr");
+                for (i = 1; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                    }       
+                }
+            }
+            </script>
+    </body>
+</html>

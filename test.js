@@ -1,17 +1,7 @@
-//requiring path and fs modules
-const path = require('path');
-const fs = require('fs');
-//joining path of directory 
-const directoryPath = path.join(__dirname, '/data');
-//passsing directoryPath and callback function
-fs.readdir(directoryPath, function (err, files) {
-    //handling error
-    if (err) {
-        return console.log('Unable to scan directory: ' + err);
-    } 
-    //listing all files using forEach
-    files.forEach(function (file) {
-        // Do whatever you want to do with the file
-        console.log(file); 
-    });
-});
+var url= "https://script.google.com/macros/s/AKfycbxpn0Yxexari6sRTbBrfQD6l619IjqjmOLSx8tQRze0Dv91z6gHz6HX2D5Zw8vz5I3Y/exec?sheetName=BANGGIA";
+var fetch = require("node-fetch");
+var t1 = new Date();
+fetch(url).then(res=>res.json()).then(j=>{
+    console.log(j)
+    console.log((- t1.getTime() + (new Date()).getTime())/1000, "s");
+})

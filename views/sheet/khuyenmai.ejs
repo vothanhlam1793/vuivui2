@@ -19,7 +19,8 @@
                     <td class="text-center" style="width: 40%"><strong>Tên</strong></td>    
                     <td class="text-center" style="width: 15%"><strong>Giá lẻ - 3</strong></td>
                     <td class="text-center" style="width: 15%"><strong>Cấp 2</strong></td>
-                    <td class="text-center" style="width: 15%"><strong>Cấp 1</strong></td>
+                    <!-- <td class="text-center" style="width: 15%"><strong>Cấp 1</strong></td> -->
+                    <td class="text-center" style="width: 15%">Loại</td>
                     <td class="text-center" style="width: 15%"><strong>Hãng</strong></td>
                 <tr>
                 <% data.forEach(function(e){ %>
@@ -35,7 +36,8 @@
                     <td><%= e.name %></td>
                     <td class="text-right"><%= numberWithCommas(Math.round(e.price_3/1000)*1000) %></td>
                     <td class="text-right"><%= numberWithCommas(Math.round(e.price_2/1000)*1000) %></td>
-                    <td class="text-right"><%= numberWithCommas(Math.round(e.price_1/1000)*1000) %></td>
+                    <!-- <td class="text-right"><%= numberWithCommas(Math.round(e.price_1/1000)*1000) %></td> -->
+                    <td class="text-center"><%= e.group %></td>
                     <td class="text-right"><%= e.branch %></td>
                 </tr>
                 <% }); %>

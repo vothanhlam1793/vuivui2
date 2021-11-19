@@ -19,20 +19,19 @@
                 <script src="/js/models.js"></script>
     </head>
     <body class="container">
-        <div class="alert alert-secondary">   
-          <%- include("sheet/menu.ejs",{}) %>
+        <div class="alert alert-primary">   
+          <%- include("menu.ejs",{}) %>
       </div>
-        <h1>Products</h1>
+        <h1>Tra cứu nhanh</h1>
         <div>
-            <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+            <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Nhập vào đây để tra cứu nhé" title="Type in a name">
             <table class="table table-bordered" id="myTable">
                 <tr>
                     <td>Mã</td>
-                    <td>Giá lẻ</td>
-                    <td>Cấp 3</td>
-                    <td>Cấp 2</td>
-                    <!-- <td>Cấp 1</td> -->
+                    <td>Giá đại lý</td>
+                    <td>Chiết khấu</td>
                     <td>Loại</td>
+                    <td>Hãng</td>
                 </tr>
                 <% function numberWithCommas(x) { %>
                  <% return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); %>
@@ -42,9 +41,8 @@
                     <td><%= e.productNameColumn %></td>
                     <td style="text-align:right" class="table-secondary"><%= numberWithCommas(e.productPriceColumn) %></td>
                     <td style="text-align:right" class="table-danger"><%= numberWithCommas(e.cap3) %></td>
-                    <td style="text-align:right" class="table-warning"><%= numberWithCommas(e.cap2) %></td>
-                    <!-- <td style="text-align:right" class="table-primary"><%= numberWithCommas(e.cap1) %></td> -->
                     <td><%= e.sheet %></td>
+                    <td><%= e.branch %></td>
                 </tr>
                 <% }) %>
             </table>

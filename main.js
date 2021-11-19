@@ -177,6 +177,7 @@ app.post('/file_upload', function (req, res) {
         fs.unlinkSync(uploadPath);
     });
 })
+require("./route/customer")(app);
 require("./route/sheet")(app);
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

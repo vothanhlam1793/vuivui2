@@ -34,7 +34,8 @@ jsonData.forEach(function(file){
     for(var i = parseInt(file.config.fromRow); i <= parseInt(file.config.toRow); i++){
         var cap1 = 0;
         var cap2 = 0;
-        var cap3 = 0;        
+        var cap3 = 0;
+        var daily = 0;        
         var regularPrice = 0;
         try {
             regularPrice = temp[0].data[i][pColumn];
@@ -44,6 +45,7 @@ jsonData.forEach(function(file){
             switch(file.config.brandName){
                 case "DAHUA": {
                     if(typeof regularPrice == "number"){
+                        daily = Math.round(regularPrice*0.5/1000)*1000;
                         cap1 = Math.round(regularPrice*0.5*0.75/1000)*1000;
                         cap2 = Math.round(regularPrice*0.5*0.77/1000)*1000;
                         cap3 = Math.round(regularPrice*0.5*0.79/1000)*1000;
@@ -51,6 +53,7 @@ jsonData.forEach(function(file){
                 } break;
                 case "HIKVISION": {
                     if(typeof regularPrice == "number"){
+                        daily = Math.round(regularPrice*0.5/1000)*1000;
                         cap1 = Math.round(regularPrice*0.6*0.70/1000)*1000;
                         cap2 = Math.round(regularPrice*0.6*0.72/1000)*1000;
                         cap3 = Math.round(regularPrice*0.6*0.74/1000)*1000;
@@ -58,6 +61,7 @@ jsonData.forEach(function(file){
                 } break;
                 case "KBVISION": {
                     if(typeof regularPrice == "number"){
+                        daily = Math.round(regularPrice*0.6/1000)*1000;
                         cap1 = Math.round(regularPrice*0.5*0.76/1000)*1000;
                         cap2 = Math.round(regularPrice*0.5*0.78/1000)*1000;
                         cap3 = Math.round(regularPrice*0.5*0.80/1000)*1000;
@@ -74,7 +78,10 @@ jsonData.forEach(function(file){
                 productPriceColumn: temp[0].data[i][pColumn],
                 cap1: cap1,
                 cap2: cap2,
-                cap3: cap3
+                cap3: cap3,
+                daily: daily,
+                sheet: file.nameSheet,
+                branch: file.config.brandName
             })
         } catch (f) {
 

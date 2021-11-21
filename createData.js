@@ -13,12 +13,12 @@ jsonData.forEach(function(file){
     temp = obj.filter(function(e){
         return e.name == file.nameSheet;
     })
-    console.log(temp[0].data[file.config.headRow]);
+    // console.log(temp[0].data[file.config.headRow]);
     // var nColumn = 0;
     var pColumn = 0;
     try {
         temp[0].data[file.config.headRow].forEach(function(e, i){
-            console.log(e);
+            // console.log(e);
             if(e.split("\r\n").join("") == file.config.productNameColumn.split("\r\n").join("")){
                 nColumn = i;
             }
@@ -29,7 +29,7 @@ jsonData.forEach(function(file){
     } catch (e) {
 
     }
-    console.log(nColumn, pColumn);
+    // console.log(nColumn, pColumn);
     // console.log("COUNTER:", file.config.fromRow, file.config.toRow)
     for(var i = parseInt(file.config.fromRow); i <= parseInt(file.config.toRow); i++){
         var cap1 = 0;
@@ -91,5 +91,4 @@ jsonData.forEach(function(file){
 data = data.filter(function(e){
     return (e.productNameColumn != undefined) && (e.productPriceColumn != undefined);
 })
-// console.log(data.length);
 module.exports.products = data;

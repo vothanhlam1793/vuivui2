@@ -180,6 +180,6 @@ app.post('/file_upload', function (req, res) {
 require("./route/customer")(app);
 require("./route/sheet")(app);
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
+app.listen(PORT, "192.168.1.43", () => {
     console.log(`Server is running on port ${PORT}.`);
 });

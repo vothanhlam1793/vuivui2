@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title><%= title %></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+                <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+                <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
+                <!-- Popper JS -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+                <script src="/js/undercore.js"></script>
+                <script src="/js/backbone.js"></script>
+                <script src="/js/models.js"></script>
+                <link rel="stylesheet" href="/css/phone.css">
+                <link rel="stylesheet" href="/css/messenger.css">
+    </head>
+    <body class="container-fluid">
+        <div>   
+            <%- include("menu.ejs",{}) %>
+        </div>
+        <div class="text-center mt-2">
+            <h4>Tìm giá nhanh</h4>
+        </div>
+        <div id="app">
+            <div class="m-2 p-3">
+                <input class="form-control" placeholder="Nhập tên sản phẩm nào" v-model="inputSearch" @keyup="onSearchHandler(inputSearch)">
+            </div>
+            <div class="">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th class="col">Tên sản phẩm</th>
+                            <th class="col">Giá</th>
+                            <th class="col">Lưu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="product in products" :class="getColor(product.type)">
+                            <td v-if="product.type == 'KHUYENMAI'" >{{product.name}} <span class="badge badge-danger">Đang khuyến mãi</span></td>
+                            <td v-else>{{product.name}}</td>
+                            <td class="text-right">{{numberWithCommas(product.price)}}</td>
+                            <td v-if="checkItem(product) == -1"><button class="btn btn-primary" @click="addItem(product)">A</button></td>
+                            <td v-else ><button class="btn btn-danger" @click="deleteItem(product)">D</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="hotline-phone-ring-wrap">
+            <div class="hotline-phone-ring">
+                <!-- <div class="hotline-phone-ring-circle"></div> -->
+                <div class="hotline-phone-ring-circle-fill"></div>
+                <div class="hotline-phone-ring-img-circle">
+                    <a href="tel:0869270717" class="pps-btn-img">
+                        <img src="/images/icon-call-nh.png" alt="Gọi điện thoại" width="50">
+                    </a>
+                </div>
+            </div>
+            <div class="hotline-bar">
+                <a href="tel:0869270717">
+                    <span class="text-hotline">0869.27.07.17</span>
+                </a>
+            </div>
+        </div>
+        <script src="/js/customer/model.js"></script>
+        <script src="/js/customer/banggia.js"></script>
+    </body>
+</html>

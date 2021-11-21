@@ -5,6 +5,7 @@ var objProduct = {
     date: new Date("2000-01-01"),
     data: []
 }
+
 var objKhuyenmai = {
     date: new Date("2000-01-01"),
     data: []

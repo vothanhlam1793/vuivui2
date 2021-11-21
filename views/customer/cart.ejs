@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title><%= title %></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+                <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+                <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
+                <!-- Popper JS -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+                <script src="/js/undercore.js"></script>
+                <script src="/js/backbone.js"></script>
+                <script src="/js/models.js"></script>
+                <link rel="stylesheet" href="/css/phone.css">
+                <link rel="stylesheet" href="/css/messenger.css">
+    </head>
+    <body class="container-fluid">
+        <div>   
+            <%- include("menu.ejs",{}) %>
+        </div>
+        <div class="text-center mt-2">
+            <h4>Giỏ hàng</h4>
+        </div>
+        <div id="app">
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="thead-dark">
+                    <th class="col">Tên</th>
+                    <th class="col">Giá</th>
+                    <th class="col">Số lượng</th>
+                    <th class="col">Hành động</th>
+                </thead>
+                <tbody>
+                    <tr v-for="item in items">
+                        <td>{{item.name}}</td>
+                        <td class="text-right">{{numberWithCommas(item.price)}}</td>
+                        <td>{{item.amount}}</td>
+                        <td><button class="btn btn-danger" @click="deleteItem(item)">D</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="hotline-phone-ring-wrap">
+            <div class="hotline-phone-ring">
+                <div class="hotline-phone-ring-circle"></div>
+                <div class="hotline-phone-ring-circle-fill"></div>
+                <div class="hotline-phone-ring-img-circle">
+                    <a href="tel:0869270717" class="pps-btn-img">
+                        <img src="/images/icon-call-nh.png" alt="Gọi điện thoại" width="50">
+                    </a>
+                </div>
+            </div>
+            <div class="hotline-bar">
+                <a href="tel:0869270717">
+                    <span class="text-hotline">0869.27.07.17</span>
+                </a>
+            </div>
+        </div>
+        <script src="/js/customer/model.js"></script>
+        <script src="/js/customer/giohang.js"></script>
+    </body>
+</html>

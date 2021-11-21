@@ -10,6 +10,7 @@ var Products = {
 
 async function getProducts(pNew){
     if(pNew == 1){
+        Products.data = [];
         var j = await getSheetData(url + "?sheetName=BANGGIA", 1);
         Products.data = Products.data.concat(j.map(function(e){
             return {

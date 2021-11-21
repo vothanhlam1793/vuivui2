@@ -74,5 +74,13 @@ class ControllerCart{
     }
 }
 
+
+var app_cart_mini = new Vue({
+    el: "#cart",
+    data: {
+        
+    }
+})
+
 var appProduct = new ControllerProduct(app_customer, new Product());
 var appCart = new ControllerCart(app_customer, new Cart())

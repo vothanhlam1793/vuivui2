@@ -59,12 +59,17 @@ module.exports = async app => {
     // })
     router.get("/", (req, res)=>{
         res.render("customer/index", {
-            title: "MVC"
+            title: "Bảng giá phụ kiện"
         })
     })
     router.get("/cart", (req, res)=>{
         res.render("customer/cart", {
             title: "Giỏ hàng"
+        })
+    })
+    router.get("/info", (req, res)=>{
+        res.render("customer/info", {
+            title: "Liên hệ"
         })
     })
     router.get("/data", async (req, res) => {
@@ -88,5 +93,5 @@ module.exports = async app => {
     })
     require("../createData");
     getProducts(1);
-    app.use("/customer", router);
+    app.use("/", router);
 }

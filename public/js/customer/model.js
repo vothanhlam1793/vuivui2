@@ -14,7 +14,6 @@ class Cart {
         var index = this.items.findIndex(function(e){
             return e.name == item.name;
         });
-        console.log(index, item);
         if(index >= 0){
 
         } else {
@@ -53,7 +52,7 @@ class Product {
     constructor(){
         this.products = [];
         var that = this;
-        $.get("/customer/data?from=EXCEL", function(data){
+        $.get("/data", function(data){
             that.products = data;
             that.onProductChanged(that.products);
         })

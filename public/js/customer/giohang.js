@@ -29,7 +29,9 @@ class ControllerCart{
         this.view.items = items;
     }
     handlerDeleteItem = item => {
-        this.model.deleteItem(item);
+        if(confirm("Bạn chắc chắn xóa món " + item.name + " chứ?")){
+            this.model.deleteItem(item);
+        }
     }
 }
 

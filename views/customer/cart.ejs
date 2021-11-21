@@ -21,7 +21,7 @@
                     <tr v-for="item in items">
                         <td>{{item.name}}</td>
                         <td class="text-right">{{numberWithCommas(item.price)}}</td>
-                        <td>{{item.amount}}</td>
+                        <td><input v-model="item.amount" class="form-control"></td>
                         <td><button class="btn btn-danger" @click="deleteItem(item)">Xóa</button></td>
                     </tr>
                 </tbody>

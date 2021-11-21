@@ -7,11 +7,11 @@
             <%- include("menu.ejs",{}) %>
         </div>
         <div class="text-center mt-2">
-            <h4>Tìm giá nhanh</h4>
+            <h4>Tra giá nhanh</h4>
         </div>
-        <div class="text-right" id="cart">
+        <!-- <div class="text-right" id="cart">
             <a class="btn btn-info" href="/cart">Xem giỏ hàng</a>   
-        </div>
+        </div> -->
         <div id="app">
             <div class="m-2 p-3">
                 <input class="form-control" placeholder="Nhập tên sản phẩm nào" v-model="inputSearch" @keyup="onSearchHandler(inputSearch)">
@@ -22,7 +22,7 @@
                         <tr class="text-center">
                             <th class="col">Tên sản phẩm</th>
                             <th class="col">Giá</th>
-                            <th class="col">Lưu</th>
+                            <!-- <th class="col">Lưu</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -30,8 +30,8 @@
                             <td v-if="product.type == 'KHUYENMAI'" >{{product.name}} <span class="badge badge-danger">Đang khuyến mãi</span></td>
                             <td v-else>{{product.name}}</td>
                             <td class="text-right">{{numberWithCommas(product.price)}}</td>
-                            <td v-if="checkItem(product) == -1"><button class="btn btn-primary" @click="addItem(product)">Thêm</button></td>
-                            <td v-else ><button class="btn btn-danger" @click="deleteItem(product)">Xóa</button></td>
+                            <!-- <td v-if="checkItem(product) == -1"><button class="btn btn-primary" @click="addItem(product)">Thêm</button></td>
+                            <td v-else ><button class="btn btn-danger" @click="deleteItem(product)">Xóa</button></td> -->
                         </tr>
                     </tbody>
                 </table>

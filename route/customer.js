@@ -72,6 +72,11 @@ module.exports = async app => {
             title: "Liên hệ"
         })
     })
+    router.get("/howtobuy", (req, res)=>{
+        res.render("customer/howtobuy", {
+            title: "Liên hệ"
+        })
+    })
     router.get("/data", async (req, res) => {
         var data = [];
         data = await getProducts();

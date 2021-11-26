@@ -2,6 +2,33 @@
     <div class="mt-3 mb-3 p-2 sticky-top">
         <input class="form-control border border-danger" placeholder="Nhập vào đây món mình cần nhé ..." v-model="inputSearch" @keyup="onInputSeach">
     </div>
+    <div class="text-center mb-2" style="display: none;">
+            <div class="form-check-inline">
+                <label class="form-check-label" for="check1">
+                    <input type="checkbox" class="form-check-input" id="checkHik" name="vehicle1" value="HIKVISION" @change="onCheck()" v-model="objCheck.hikvision" checked>Hikvision
+                </label>
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label" for="check2">
+                    <input type="checkbox" class="form-check-input" id="checkDahua" name="vehicle2" value="DAHUA" @change="onCheck()" v-model="objCheck.dahua"  checked>Dahua
+                </label>
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" id="checkKb" name="vehicle2" value="KBVISION" @change="onCheck()" v-model="objCheck.kbvision"  checked>Kbvision
+                </label>
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" id="checkWifi" name="vehicle2" value="CAMERAWIFI" @change="onCheck()" v-model="objCheck.camerawifi"  checked>Camera wifi
+                </label>
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" id="checkPhukien" name="vehicle2" value="PHUKIEN" @change="onCheck()" v-model="objCheck.phukien"  checked>Phụ kiện
+                </label>
+            </div>
+    </div>
     <div v-for="branch in branches('branch', products)" class="border p-3">
         <h3>{{branch}}</h3>
         <div v-for="sheet in branches('sheet', getProductsWithBranch(branch))">
@@ -34,6 +61,15 @@
 <script src="/js/ViewModel/banggia.js"></script>
 <script>
     var mix_banggia = {
+        data: {
+            objCheck: {
+                hikvision: true,
+                dahua: true,
+                kbvision: true,
+                camerawifi: true,
+                phukien: true
+            }
+        },
         // Function support View - not use process data
         methods: {
             getProductsWithBranch: function(branch, sheet){
@@ -41,7 +77,45 @@
                     return ((product.branch == branch) && (product.sheet == (sheet||product.sheet)));
                 })
             },
+            getProducts: function(){
+                return temp;
+            },
+            onCheck: function(){
+                var temp = this.productsOriginal.slice();
+                if(this.objCheck.hikvision == false){
+                    temp = temp.filter(function(product){
+                        return product.branch != 'HIKVISION';
+                    })
+                }
 
+                if(this.objCheck.dahua == false){
+                    temp = temp.filter(function(product){
+                        return product.branch != 'DAHUA';
+                    })
+                }
+                if(this.objCheck.kbvision == false){
+                    temp = temp.filter(function(product){
+                        return product.branch != 'KBVISION';
+                    })
+                }
+                if(this.objCheck.camerawifi == false){
+                    temp = temp.filter(function(product){
+                        return product.branch != 'EZVIZ';
+                    })
+                    temp = temp.filter(function(product){
+                        return product.branch != 'IMOU';
+                    })
+                    temp = temp.filter(function(product){
+                        return product.branch != 'KB ONE';
+                    })
+                }
+                if(this.objCheck.phukien == false){
+                    temp = temp.filter(function(product){
+                        return product.branch != "Phụ kiện camera";
+                    })
+                }
+                this.products = temp.slice();
+            },
             // branch 
             branches: function(key, arr){
                 const unique = [...new Set(arr.map(item => item[key]))];

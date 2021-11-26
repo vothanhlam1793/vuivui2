@@ -25,7 +25,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 require("./route/customer")(app);
-// require("./route/sheet")(app);
+app.use("/baogia", require("./route/baogia"));
+
 app.get('*', function(req, res){
   res.render("customer/index", {
     title: "Bảng giá phụ kiện"
@@ -33,6 +34,6 @@ app.get('*', function(req, res){
 });
 
 const PORT = process.env.PORT || 8080;
-app.listen(PORT,() => {
+app.listen(PORT,"192.168.1.43",() => {
     console.log(`Server is running on port ${PORT}.`);
 });

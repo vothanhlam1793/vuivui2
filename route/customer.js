@@ -16,7 +16,9 @@ async function getProducts(pNew){
             return {
                 name: e.name,
                 price: e.price_3,
-                type: "PHUKIEN"
+                type: "PHUKIEN",
+                branch: "Phụ kiện camera",
+                sheet: e.group || ""
             }
         }))
         var k = await getSheetData(url + "?sheetName=KHUYENMAICAM", 1);
@@ -24,10 +26,23 @@ async function getProducts(pNew){
             return {
                 name: e.name,
                 price: e.price_3,
-                type: "KHUYENMAI"
+                type: "Khuyến mãi",
+                branch: e.branch || "",
+                sheet: e.group || ""
             }
         }))
-        console.log("DONE - update data", k.length, j.length);
+
+        var l = await getSheetData(url + "?sheetName=CAMERAWIFI", 1);
+        Products.data = Products.data.concat(l.map(function(e){
+            return {
+                name: e.name,
+                price: e.price_3,
+                type: "Camera Wifi",
+                branch: e.branch || "",
+                sheet: e.group || ""
+            }
+        }))
+        console.log("DONE - update data", k.length, j.length, l.length);
     } else {
         return Products.data;
     }
@@ -50,14 +65,7 @@ async function getSheetData(pUrl, pNew){
 
 module.exports = async app => {
     var router = require("express").Router(); 
-    // router.get("/", (req, res)=>{
-    //     d = require("../createData");
-    //     res.render("customer/customer", {
-    //         title: "Xem nhanh bảng gía",
-    //         data: d.products,
-    //         message: ""
-    //     })
-    // })
+
     router.get("/", (req, res)=>{
         res.render("customer/index", {
             title: "Bảng giá phụ kiện"
@@ -78,25 +86,36 @@ module.exports = async app => {
             title: "Liên hệ"
         })
     })
+
     router.get("/data", async (req, res) => {
         var data = [];
+        // Get data from Sheet
         data = await getProducts();
+
+        // Get data from file excel
         var temp = require("../createData").products;
-        data = data.concat(temp.map(function(e){
+        temp = temp.map(function(e){
             return {
                 name: e.productNameColumn,
                 price: e.cap3,
-                type: "CAMERA"
+                type: "CATALOG",
+                branch: e.branch,
+                sheet: e.sheet
             };
-        }));
+        });
+
+        // Concat 2 du lieu lai voi nhau
+        data = data.concat(temp);
         res.send(data);
     })
+    
     router.get("/renew", async function(req, res){
         await getProducts(1);
         res.send({
             message: "OK"
         })
     })
+
     require("../createData");
     getProducts(1);
     app.use("/", router);

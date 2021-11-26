@@ -1,0 +1,30 @@
+<div id="app">
+    <div class="mt-3 mb-3 p-2 sticky-top">
+        <input class="form-control border border-danger" placeholder="Nhập vào đây món mình cần nhé ..." v-model="inputSearch" @keyup="onInputSeach">
+    </div>
+    <!-- <div v-for="branch in branches()" class="border">
+        <h1>{{branch}}</h1>
+    </div> -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+                <tr class="text-center">
+                    <th class="col">Tên sản phẩm</th>
+                    <th class="col">Giá</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="product in products" :class="getColor(product.type)">
+                    <td v-if="product.type == 'KHUYENMAI'" >{{product.name}} <span class="badge badge-danger">Đang khuyến mãi</span></td>
+                    <td v-else>{{product.name}}</td>
+                    <td class="text-right">{{numberWithCommas(product.price)}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- <script src="/js/customer/banggia.js"></script> -->
+<script src="/js/ViewModel/banggia.js"></script>
+<script>
+    var app_banggia = VMBanggia("#app");
+</script>

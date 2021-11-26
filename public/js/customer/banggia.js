@@ -1,3 +1,6 @@
+// function unique(arr){
+//     const unique = [...new Set(app_customer.products.map(item => item.branch +  "-"+item.sheet))]; // [ 'A', 'B']
+// }
 var app_customer = new Vue({
     el: "#app", 
     data: {
@@ -28,6 +31,10 @@ var app_customer = new Vue({
         },
         numberWithCommas: function (x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        },
+        branches: function(){
+            const unique = [...new Set(this.products.map(item => item.branch))];
+            return unique;
         }
         
     },
@@ -74,13 +81,4 @@ class ControllerCart{
     }
 }
 
-
-var app_cart_mini = new Vue({
-    el: "#cart",
-    data: {
-        
-    }
-})
-
 var appProduct = new ControllerProduct(app_customer, new Product());
-var appCart = new ControllerCart(app_customer, new Cart())

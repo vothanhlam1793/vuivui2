@@ -1,6 +1,7 @@
 <html>
     <head>
         <%- include("header.ejs", {title: title}) %>
+        <script src="/js/customer/model.js"></script>
     </head>
     <body class="container-fluid">
         <div>   
@@ -9,52 +10,7 @@
         <div class="text-center mt-2">
             <h4>Tra giá nhanh</h4>
         </div>
-        <!-- <div class="text-right" id="cart">
-            <a class="btn btn-info" href="/cart">Xem giỏ hàng</a>   
-        </div> -->
-        <div id="app">
-            <div class="mt-3 mb-3 p-2 sticky-top">
-                <input class="form-control border border-danger" placeholder="Nhập vào đây món mình cần nhé ..." v-model="inputSearch" @keyup="onSearchHandler(inputSearch)">
-            </div>
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped table-hover">
-                    <thead class="thead-dark">
-                        <tr class="text-center">
-                            <th class="col">Tên sản phẩm</th>
-                            <th class="col">Giá</th>
-                            <!-- <th class="col">Lưu</th> -->
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="product in products" :class="getColor(product.type)">
-                            <td v-if="product.type == 'KHUYENMAI'" >{{product.name}} <span class="badge badge-danger">Đang khuyến mãi</span></td>
-                            <td v-else>{{product.name}}</td>
-                            <td class="text-right">{{numberWithCommas(product.price)}}</td>
-                            <!-- <td v-if="checkItem(product) == -1"><button class="btn btn-primary" @click="addItem(product)">Thêm</button></td>
-                            <td v-else ><button class="btn btn-danger" @click="deleteItem(product)">Xóa</button></td> -->
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-        <div class="hotline-phone-ring-wrap">
-            <div class="hotline-phone-ring">
-                <!-- <div class="hotline-phone-ring-circle"></div> -->
-                <div class="hotline-phone-ring-circle-fill"></div>
-                <div class="hotline-phone-ring-img-circle">
-                    <a href="tel:0869270717" class="pps-btn-img">
-                        <img src="/images/icon-call-nh.png" alt="Gọi điện thoại" width="50">
-                    </a>
-                </div>
-            </div>
-            <div class="hotline-bar">
-                <a href="tel:0869270717">
-                    <span class="text-hotline">0869.27.07.17</span>
-                </a>
-            </div>
-        </div>
-        <script src="/js/customer/model.js"></script>
-        <script src="/js/customer/banggia.js"></script>
+        <%- include("banggia_2.ejs") %>
+        <%- include("call.ejs") %>
     </body>
 </html>

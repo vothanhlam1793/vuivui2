@@ -1,0 +1,59 @@
+<div id="app">
+    <div class="mt-3 mb-3 p-2 sticky-top">
+        <input class="form-control border border-danger" placeholder="Nhập vào đây món mình cần nhé ..." v-model="inputSearch" @keyup="onInputSeach">
+    </div>
+    <div v-for="branch in branches('branch', products)" class="border p-3">
+        <h3>{{branch}}</h3>
+        <div v-for="sheet in branches('sheet', getProductsWithBranch(branch))">
+            <div v-if="(branch == 'KBVISION')||(branch == 'DAHUA')||(branch == 'HIKVISION')" class="text-center">
+                <h4>{{branch}}:{{sheet}}</h4>
+            </div>
+            <div v-else class="text-center">
+                <h4>{{sheet}}</h4>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead class="thead-dark">
+                        <tr class="text-center">
+                            <th class="col">Tên sản phẩm</th>
+                            <th class="col">Giá</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="product in getProductsWithBranch(branch, sheet)" :class="getColor(product.type)">
+                            <td v-if="product.type == 'Khuyến mãi'" >{{product.name}} <span class="badge badge-danger">Đang khuyến mãi</span></td>
+                            <td v-else>{{product.name}}</td>
+                            <td class="text-right">{{numberWithCommas(product.price)}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/ViewModel/banggia.js"></script>
+<script>
+    var mix_banggia = {
+        // Function support View - not use process data
+        methods: {
+            getProductsWithBranch: function(branch, sheet){
+                return this.products.filter(function(product){
+                    return ((product.branch == branch) && (product.sheet == (sheet||product.sheet)));
+                })
+            },
+
+            // branch 
+            branches: function(key, arr){
+                const unique = [...new Set(arr.map(item => item[key]))];
+                return unique;
+            },
+            // function support color
+            getColor: function(type){
+                if(type == "Khuyến mãi"){
+                    return "table-danger"
+                }
+            },
+        }
+    }
+    var app_banggia = VMBanggia("#app", mix_banggia);
+</script>

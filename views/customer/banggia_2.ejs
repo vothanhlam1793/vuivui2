@@ -43,7 +43,9 @@
                     <thead class="thead-dark">
                         <tr class="text-center">
                             <th class="col">Tên sản phẩm</th>
-                            <th class="col">Giá</th>
+                            <th class="col">Giá lẻ</th>
+                            <th class="col">Cấp 2</th>
+                            <th class="col">Cấp 1</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,6 +53,8 @@
                             <td v-if="product.type == 'Khuyến mãi'" >{{product.name}} <span class="badge badge-danger">Đang khuyến mãi</span></td>
                             <td v-else>{{product.name}}</td>
                             <td class="text-right">{{numberWithCommas(product.price)}}</td>
+                            <td class="text-right">{{numberWithCommas(product.price_2)}}</td>
+                            <td class="text-right">{{numberWithCommas(product.price_1)}}</td>
                         </tr>
                     </tbody>
                 </table>

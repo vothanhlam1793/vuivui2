@@ -16,6 +16,8 @@ async function getProducts(pNew){
             return {
                 name: e.name,
                 price: e.price_3,
+                price_2: e.price_2,
+                price_1: e.price_1,
                 type: "PHUKIEN",
                 branch: "Phụ kiện camera",
                 sheet: e.group || ""
@@ -26,6 +28,8 @@ async function getProducts(pNew){
             return {
                 name: e.name,
                 price: e.price_3,
+                price_2: e.price_2,
+                price_1: e.price_1,
                 type: "Khuyến mãi",
                 branch: e.branch || "",
                 sheet: e.group || ""
@@ -37,6 +41,8 @@ async function getProducts(pNew){
             return {
                 name: e.name,
                 price: e.price_3,
+                price_2: e.price_2,
+                price_1: e.price_1,
                 type: "Camera Wifi",
                 branch: e.branch || "",
                 sheet: e.group || ""
@@ -98,6 +104,8 @@ module.exports = async app => {
             return {
                 name: e.productNameColumn,
                 price: e.cap3,
+                price_2: e.cap2,
+                price_1: e.cap1,
                 type: "CATALOG",
                 branch: e.branch,
                 sheet: e.sheet
